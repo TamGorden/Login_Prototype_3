@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .page {
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        button {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            color: white;
+        }
+
+        .primary-btn {
+            background-color: #007bff;
+            width: 100%;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .apple-btn { background-color: #000; }
+        .google-btn { background-color: #db4437; }
+        .facebook-btn { background-color: #1877f2; }
+
+        .create-account-text {
+            margin-top: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .create-account-text:hover {
+            text-decoration: underline;
+        }
+
+        .success-page {
+            color: #2ecc71;
+            font-size: 1.2em;
+        }
+
+        .back-btn {
+            margin-top: 2rem;
+            padding: 0.5rem 1rem;
+            background-color: #666;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active-page">
+        <h2>Log In</h2>
+        
+        <div class="input-group">
+            <label>Email or Phone Number</label>
+            <input type="text">
+        </div>
+        
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password">
+        </div>
+
+        <button class="primary-btn" onclick="showPage('successRegular')">Log In</button>
+
+        <div class="social-buttons">
+            <button class="social-btn apple-btn" onclick="showPage('successApple')">
+                <i class="fab fa-apple"></i>
+                Continue with Apple
+            </button>
+            
+            <button class="social-btn google-btn" onclick="showPage('successGoogle')">
+                <i class="fab fa-google"></i>
+                Continue with Google
+            </button>
+            
+            <button class="social-btn facebook-btn" onclick="showPage('successFacebook')">
+                <i class="fab fa-facebook-f"></i>
+                Continue with Facebook
+            </button>
+        </div>
+
+        <div class="create-account-text" onclick="showPage('createAccount')">
+            New? Create a new account or sign up
+        </div>
+    </div>
+
+    <!-- Create Account Page -->
+    <div id="createAccount" class="page">
+        <h2>Create Account</h2>
+        
+        <div class="input-group">
+            <label>First Name</label>
+            <input type="text">
+        </div>
+        
+        <div class="input-group">
+            <label>Last Name</label>
+            <input type="text">
+        </div>
+        
+        <div class="input-group">
+            <label>Email or Phone Number</label>
+            <input type="text" placeholder="Enter email or phone">
+        </div>
+        
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password">
+        </div>
+
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <input type="password">
+        </div>
+
+        <button class="primary-btn" onclick="showPage('successCreateAccount')">Create Account</button>
+        <button class="back-btn" onclick="showPage('loginPage')">Back</button>
+    </div>
+
+    <!-- Success Pages -->
+    <div id="successApple" class="page">
+        <h2 class="success-page">🎉 Success with Apple!</h2>
+        <button class="back-btn" onclick="showPage('loginPage')">Back to Login</button>
+    </div>
+
+    <div id="successGoogle" class="page">
+        <h2 class="success-page">🎉 Success with Google!</h2>
+        <button class="back-btn" onclick="showPage('loginPage')">Back to Login</button>
+    </div>
+
+    <div id="successFacebook" class="page">
+        <h2 class="success-page">🎉 Success with Facebook!</h2>
+        <button class="back-btn" onclick="showPage('loginPage')">Back to Login</button>
+    </div>
+
+    <div id="successRegular" class="page">
+        <h2 class="success-page">🎉 Login Successful!</h2>
+        <button class="back-btn" onclick="showPage('loginPage')">Back to Login</button>
+    </div>
+
+    <div id="successCreateAccount" class="page">
+        <h2 class="success-page">🎉 Account Created!</h2>
+        <p>Welcome to our community!</p>
+        <button class="back-btn" onclick="showPage('loginPage')">Back to Login</button>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            
+            // Show requested page
+            document.getElementById(pageId).classList.add('active-page');
+        }
+    </script>
+</body>
+</html>
